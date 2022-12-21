@@ -13,9 +13,7 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
 
-    @Id
-    @GeneratedValue
-    @Column(name = "member_id")
+    @Id @GeneratedValue @Column(name = "member_id")
     private Long id;
 
     private String loginId;
@@ -30,4 +28,13 @@ public class Member {
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Heart> likes = new ArrayList<>();
+
+    public static Member createMember(String loginId, String password, String name) {
+        Member member = new Member();
+        member.loginId = loginId;
+        member.password = password;
+        member.name = name;
+
+        return member;
+    }
 }

@@ -13,9 +13,7 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Post {
 
-    @Id
-    @GeneratedValue
-    @Column(name = "post_id")
+    @Id @GeneratedValue @Column(name = "post_id")
     private Long id;
 
     private String title;
@@ -29,4 +27,15 @@ public class Post {
 
     @ManyToOne(fetch = FetchType.LAZY) @JoinColumn(name = "member_id")
     private Member member;
+
+    public static Post createPost(String title, String body, Member member) {
+        Post post = new Post();
+        post.title = title;
+        post.body = body;
+
+        post.member = member;
+        member.getPosts().add(post);
+
+        return post;
+    }
 }

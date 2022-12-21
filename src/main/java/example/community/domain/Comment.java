@@ -11,9 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Comment {
 
-    @Id
-    @GeneratedValue
-    @Column(name = "comment_id")
+    @Id @GeneratedValue @Column(name = "comment_id")
     private Long id;
 
     private String body;
@@ -23,4 +21,17 @@ public class Comment {
 
     @ManyToOne(fetch = FetchType.LAZY) @JoinColumn(name = "posts_id")
     private Post post;
+
+    public static Comment createComment(String body, Member member, Post post) {
+        Comment comment = new Comment();
+        comment.body = body;
+
+        comment.post = post;
+        post.getComments().add(comment);
+
+        comment.member = member;
+        member.getComments().add(comment);
+
+        return comment;
+    }
 }

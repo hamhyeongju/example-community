@@ -19,4 +19,15 @@ public class Heart {
 
     @ManyToOne(fetch = FetchType.LAZY) @JoinColumn(name = "member_id")
     private Member member;
+
+    public static Heart createHeart(Post post, Member member) {
+        Heart heart = new Heart();
+        heart.post = post;
+        heart.member = member;
+
+        post.getHearts().add(heart);
+        member.getLikes().add(heart);
+
+        return heart;
+    }
 }
