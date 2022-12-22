@@ -4,10 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -72,5 +69,20 @@ public class PostController {
         redirectAttributes.addAttribute("post_id", post_id);
 
         return "redirect:/post/{post_id}";
+    }
+
+    /**
+     * 게시글 수정
+     */
+    @PutMapping("/post/{post_id}")
+    public String updatePost(@PathVariable Long post_id,
+                             @ModelAttribute WritePostDto writePostDto,
+                             RedirectAttributes redirectAttributes) {
+
+        if (post_id != null) postService.updatePost(post_id, writePostDto);
+
+        redirectAttributes.addAttribute("post_id", post_id);
+
+        return "redirect:/{post_id}";
     }
 }
