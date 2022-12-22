@@ -21,9 +21,11 @@ public class Post extends BaseTimeEntity {
 
     @OneToMany(mappedBy = "post")
     private List<Heart> hearts = new ArrayList<>();
+    private int heartNum;
 
     @OneToMany(mappedBy = "post")
     private List<Comment> comments = new ArrayList<>();
+    private int commentNum;
 
     @ManyToOne(fetch = FetchType.LAZY) @JoinColumn(name = "member_id")
     private Member member;
