@@ -5,6 +5,7 @@ import example.community.repository.PostRepository;
 import example.community.service.dto.CommentDto;
 import example.community.service.dto.PostDto;
 import example.community.service.dto.PostListDto;
+import example.community.service.dto.WritePostDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,5 +36,10 @@ public class PostService {
         }).collect(Collectors.toList());
 
         return new PostDto(findPost.getId(), findPost.getTitle(), findPost.getBody(), findPost.getMember().getName(), commentDtos);
+    }
+
+    public WritePostDto findWritePostDto(Long post_id) {
+        Post findPost = postRepository.findById(post_id).orElseThrow(IllegalAccessError::new);
+        return new WritePostDto(findPost.getTitle(), findPost.getBody());
     }
 }

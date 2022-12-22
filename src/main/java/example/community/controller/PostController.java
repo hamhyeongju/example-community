@@ -3,6 +3,7 @@ package example.community.controller;
 import example.community.service.PostService;
 import example.community.service.dto.PostDto;
 import example.community.service.dto.PostListDto;
+import example.community.service.dto.WritePostDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -55,10 +56,10 @@ public class PostController {
      */
     @GetMapping("/post/{post_id}/edit")
     public String editPostForm(@PathVariable Long post_id, Model model) {
-        PostDto postDto = postService.findPostDto(post_id);
-        model.addAttribute("postDto", postDto);
+        WritePostDto writePostDto = postService.findWritePostDto(post_id);
+        model.addAttribute("postDto", writePostDto);
 
-        return "post/editform";
+        return "post/{post_id}editform";
     }
 
     /**
