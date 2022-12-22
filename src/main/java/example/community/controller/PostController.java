@@ -1,11 +1,14 @@
 package example.community.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -56,5 +59,18 @@ public class PostController {
         model.addAttribute("postDto", postDto);
 
         return "post/editform";
+    }
+
+    /**
+     * 게시글 등록
+     */
+    @PostMapping("/post")
+    public String createPost(@ModelAttribute WritePostDto writePostDto, RedirectAttributes redirectAttributes,
+                             @AuthenticationPrincipal UserDetailsImpl userDetails) {
+
+        Long post_id = postService.createPost(writePostDto, userDetails.getMember().getId());
+        redirectAttributes.addAttribute("post_id", post_id);
+
+        return "redirect:/post/{post_id}";
     }
 }
