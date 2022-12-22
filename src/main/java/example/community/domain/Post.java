@@ -34,6 +34,8 @@ public class Post extends BaseTimeEntity {
         Post post = new Post();
         post.title = title;
         post.body = body;
+        post.heartNum = 0;
+        post.commentNum = 0;
 
         post.member = member;
         member.getPosts().add(post);
