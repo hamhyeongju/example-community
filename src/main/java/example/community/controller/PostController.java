@@ -1,5 +1,7 @@
 package example.community.controller;
 
+import example.community.service.PostService;
+import example.community.service.dto.PostListDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
