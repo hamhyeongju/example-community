@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Heart {
+public class Heart extends BaseTimeEntity {
 
     @Id @GeneratedValue @Column(name = "heart_id")
     private Long id;
