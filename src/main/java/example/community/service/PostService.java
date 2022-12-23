@@ -60,4 +60,8 @@ public class PostService {
         Post post = postRepository.findById(post_id).orElseThrow(IllegalAccessError::new);
         post.update(writePostDto.getTitle(), writePostDto.getBody());
     }
+
+    public void delete(Long post_id) {
+        postRepository.deleteById(post_id);
+    }
 }
