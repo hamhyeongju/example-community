@@ -19,11 +19,11 @@ public class Post extends BaseTimeEntity {
     private String title;
     private String body;
 
-    @OneToMany(mappedBy = "post")
+    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
     private List<Heart> hearts = new ArrayList<>();
     private int heartNum;
 
-    @OneToMany(mappedBy = "post")
+    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
     private List<Comment> comments = new ArrayList<>();
     private int commentNum;
 
