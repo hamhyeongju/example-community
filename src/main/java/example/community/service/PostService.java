@@ -54,4 +54,10 @@ public class PostService {
 
         return postRepository.save(post).getId();
     }
+
+    @Transactional
+    public void updatePost(Long post_id, WritePostDto writePostDto) {
+        Post post = postRepository.findById(post_id).orElseThrow(IllegalAccessError::new);
+        post.update(writePostDto.getTitle(), writePostDto.getBody());
+    }
 }
