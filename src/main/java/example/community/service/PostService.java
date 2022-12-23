@@ -1,6 +1,8 @@
 package example.community.service;
 
+import example.community.domain.Member;
 import example.community.domain.Post;
+import example.community.repository.MemberRepository;
 import example.community.repository.PostRepository;
 import example.community.service.dto.CommentDto;
 import example.community.service.dto.PostDto;
@@ -19,6 +21,7 @@ import java.util.stream.Collectors;
 public class PostService {
 
     private final PostRepository postRepository;
+    private final MemberRepository memberRepository;
 
     public List<PostListDto> findList() {
         List<Post> find = postRepository.findPostList();
@@ -41,5 +44,14 @@ public class PostService {
     public WritePostDto findWritePostDto(Long post_id) {
         Post findPost = postRepository.findById(post_id).orElseThrow(IllegalAccessError::new);
         return new WritePostDto(findPost.getTitle(), findPost.getBody());
+    }
+
+    @Transactional
+    public Long createPost(WritePostDto writePostDto, Long id) {
+        Member findMember = memberRepository.findById(id).orElseThrow(IllegalAccessError::new);
+
+        Post post = Post.createPost(writePostDto.getTitle(), writePostDto.getBody(), findMember);
+
+        return postRepository.save(post).getId();
     }
 }

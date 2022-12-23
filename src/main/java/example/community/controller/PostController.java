@@ -1,5 +1,6 @@
 package example.community.controller;
 
+import example.community.configuration.security.UserDetailsImpl;
 import example.community.service.PostService;
 import example.community.service.dto.PostDto;
 import example.community.service.dto.PostListDto;
