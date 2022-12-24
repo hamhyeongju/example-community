@@ -16,6 +16,19 @@ public class CommentController {
 
     private final CommentService commentService;
 
+    /**
+     * 댓글 등록
+     */
+    @PostMapping("/post/{post_id}/comment")
+    public String addComment(@PathVariable Long post_id, RedirectAttributes redirectAttributes,
+                             @ModelAttribute CommentDto commentDto,
+                             @AuthenticationPrincipal UserDetailsImpl userDetails) {
+
+        commentService.save(commentDto, post_id, userDetails.getMember().getId());
+        redirectAttributes.addAttribute("post_id", post_id);
+
+        return "redirect:/post/{post_id}";
+    }
 
 
 }
