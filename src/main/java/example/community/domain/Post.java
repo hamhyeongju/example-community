@@ -47,4 +47,12 @@ public class Post extends BaseTimeEntity {
         this.title = title;
         this.body = body;
     }
+
+    public void minusHeartNum() {
+        this.heartNum--;
+    }
+
+    public void plusHeartNum() {
+        this.heartNum++;
+    }
 }
