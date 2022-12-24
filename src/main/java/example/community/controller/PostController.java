@@ -1,6 +1,7 @@
 package example.community.controller;
 
 import example.community.configuration.security.UserDetailsImpl;
+import example.community.service.HeartService;
 import example.community.service.PostService;
 import example.community.service.dto.PostDto;
 import example.community.service.dto.PostListDto;
@@ -19,6 +20,7 @@ import java.util.List;
 public class PostController {
 
     private final PostService postService;
+    private final HeartService heartService;
 
     /********************* 게시글 CRUD ************************************/
 
@@ -98,6 +100,20 @@ public class PostController {
     public String deletePost(@PathVariable Long post_id,
                              RedirectAttributes redirectAttributes) {
         if (post_id != null) postService.delete(post_id);
+
+        redirectAttributes.addAttribute("post_id", post_id);
+        return "redirect:/{post_id}";
+    }
+
+    /**
+     * 좋아요 기능
+     */
+    @PostMapping("/post/{post_id}/like")
+    public String changeHeartStatus(@PathVariable Long post_id,
+                       @AuthenticationPrincipal UserDetailsImpl userDetails,
+                       RedirectAttributes redirectAttributes) {
+
+        heartService.changeHeartStatus(post_id, userDetails.getMember().getId());
 
         redirectAttributes.addAttribute("post_id", post_id);
         return "redirect:/{post_id}";
