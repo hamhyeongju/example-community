@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -26,6 +27,19 @@ public class CommentController {
                              @AuthenticationPrincipal UserDetailsImpl userDetails) {
 
         commentService.save(commentDto, post_id, userDetails.getMember().getId());
+        redirectAttributes.addAttribute("post_id", post_id);
+
+        return "redirect:/post/{post_id}";
+    }
+
+    /**
+     * 댓글 수정
+     */
+    @PutMapping("/post/{post_id}/comment/{comment_id}")
+    public String updateComment(@PathVariable Long post_id, @PathVariable Long comment_id,
+                                @ModelAttribute CommentDto commentDto, RedirectAttributes redirectAttributes) {
+
+        commentService.update(comment_id, commentDto);
         redirectAttributes.addAttribute("post_id", post_id);
 
         return "redirect:/post/{post_id}";
