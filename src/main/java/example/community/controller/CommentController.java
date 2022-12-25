@@ -6,10 +6,7 @@ import example.community.service.dto.CommentDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -40,6 +37,18 @@ public class CommentController {
                                 @ModelAttribute CommentDto commentDto, RedirectAttributes redirectAttributes) {
 
         commentService.update(comment_id, commentDto);
+        redirectAttributes.addAttribute("post_id", post_id);
+
+        return "redirect:/post/{post_id}";
+    }
+
+    /**
+     * 댓글 삭제
+     */
+    @DeleteMapping("/post/{post_id}/comment/{comment_id}")
+    public String deleteComment(@PathVariable Long post_id, @PathVariable Long comment_id,
+                                RedirectAttributes redirectAttributes) {
+        commentService.delete(comment_id, post_id);
         redirectAttributes.addAttribute("post_id", post_id);
 
         return "redirect:/post/{post_id}";
