@@ -2,6 +2,7 @@ package example.community.controller;
 
 import example.community.configuration.security.UserDetailsImpl;
 import example.community.service.CommentService;
+import example.community.service.dto.CommentDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
