@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 @RequiredArgsConstructor
@@ -31,6 +32,15 @@ public class MemberController {
     public String loginForm(@ModelAttribute("loginDto") LoginDto loginDto,
                             @AuthenticationPrincipal UserDetails userDetails) {
         return (userDetails == null) ? "member/login" : "redirect:/";
+    }
+
+    /**
+     * 회원가입
+     */
+    @PostMapping("/member")
+    public String join(@ModelAttribute MemberJoinDto memberJoinDto) {
+        memberService.save(memberJoinDto);
+        return "redirect:/";
     }
 
 }
