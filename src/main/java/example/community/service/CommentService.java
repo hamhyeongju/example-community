@@ -35,4 +35,11 @@ public class CommentService {
         Comment comment = commentRepository.findById(comment_id).orElseThrow(IllegalAccessError::new);
         comment.update(commentDto.getBody());
     }
+
+    @Transactional
+    public void delete(Long comment_id, Long post_id) {
+        Post post = postRepository.findById(post_id).orElseThrow(IllegalAccessError::new);
+        commentRepository.deleteById(comment_id);
+        post.minusCommentNum();
+    }
 }
