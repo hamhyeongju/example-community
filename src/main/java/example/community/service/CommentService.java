@@ -29,4 +29,10 @@ public class CommentService {
         commentRepository.save(comment);
         post.plusCommentNum();
     }
+
+    @Transactional
+    public void update(Long comment_id, CommentDto commentDto) {
+        Comment comment = commentRepository.findById(comment_id).orElseThrow(IllegalAccessError::new);
+        comment.update(commentDto.getBody());
+    }
 }
