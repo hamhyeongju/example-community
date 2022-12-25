@@ -1,6 +1,8 @@
 package example.community.controller;
 
 import example.community.service.MemberService;
+import example.community.service.dto.LoginDto;
+import example.community.service.dto.MemberJoinDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,7 +20,7 @@ public class MemberController {
      * 회원가입 폼
      */
     @GetMapping("/join")
-    public String joinForm(@ModelAttribute("memberDto") MemberDto memberDto) {
+    public String joinForm(@ModelAttribute("memberDto") MemberJoinDto memberJoinDto) {
         return "member/join";
     }
 
