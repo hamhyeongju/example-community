@@ -55,4 +55,12 @@ public class Post extends BaseTimeEntity {
     public void plusHeartNum() {
         this.heartNum++;
     }
+
+    public void minusCommentNum() {
+        this.commentNum--;
+    }
+
+    public void plusCommentNum() {
+        this.commentNum++;
+    }
 }
