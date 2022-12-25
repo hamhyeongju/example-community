@@ -19,6 +19,7 @@ public class HeartService {
     private final MemberRepository memberRepository;
     private final HeartRepository heartRepository;
 
+    @Transactional
     public void changeHeartStatus(Long post_id, Long member_id) {
 
         heartRepository.findByMemberIdAndPostId(post_id, member_id).ifPresentOrElse(

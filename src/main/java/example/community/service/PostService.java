@@ -61,6 +61,7 @@ public class PostService {
         post.update(writePostDto.getTitle(), writePostDto.getBody());
     }
 
+    @Transactional
     public void delete(Long post_id) {
         postRepository.deleteById(post_id);
     }
