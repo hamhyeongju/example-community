@@ -27,7 +27,7 @@ public class Member extends BaseTimeEntity {
     private List<Comment> comments = new ArrayList<>();
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
-    private List<Heart> likes = new ArrayList<>();
+    private List<Heart> hearts = new ArrayList<>();
 
     public static Member createMember(String loginId, String password, String name) {
         Member member = new Member();

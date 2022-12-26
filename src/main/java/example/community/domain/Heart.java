@@ -26,7 +26,7 @@ public class Heart extends BaseTimeEntity {
         heart.member = member;
 
         post.getHearts().add(heart);
-        member.getLikes().add(heart);
+        member.getHearts().add(heart);
 
         return heart;
     }
