@@ -12,7 +12,19 @@ public class Configurer {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf().disable();
+        http
+                .csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/", "/join", "/login", "/member/**", "/error", "/css/**", "/js/**").permitAll()
+                .antMatchers("/post/**").authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .defaultSuccessUrl("/post")
+                .and()
+                .logout()
+                .logoutSuccessUrl("/");
+
         return http.build();
     }
 }
