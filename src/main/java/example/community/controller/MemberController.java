@@ -7,9 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -40,6 +38,15 @@ public class MemberController {
     @PostMapping("/member")
     public String join(@ModelAttribute MemberJoinDto memberJoinDto) {
         memberService.save(memberJoinDto);
+        return "redirect:/";
+    }
+
+    /**
+     * 회원탈퇴
+     */
+    @DeleteMapping("/member/{member_id}")
+    public String deleteMember(@PathVariable Long member_id) {
+        memberService.delete(member_id);
         return "redirect:/";
     }
 
