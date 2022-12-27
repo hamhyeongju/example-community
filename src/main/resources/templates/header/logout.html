@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
+</head>
+<body>
+<div class="col offset-10" th:fragment="logout">
+    <form th:action="@{/logout}" method="post">
+        <button type="submit" class="mt-2 col-auto btn btn-light">로그아웃</button>
+    </form>
+</div>
+</body>
+</html>
