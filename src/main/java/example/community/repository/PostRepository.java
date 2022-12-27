@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface PostRepository extends JpaRepository<Post, Long> {
 
-    @Query("select p from Post p left join fetch Member m")
+    @Query("select p from Post p left join fetch p.member")
     List<Post> findPostList();
 }
