@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
+</head>
+<body>
+<div sec:authorize="isAuthenticated()">
+    <div th:replace="~{header/logout :: logout}"></div>
+</div>
+<br>
+<!--<div class="container position-absolute top-50 start-50 translate-middle">-->
+<div class="px-5 gap-2 col mx-auto">
+    <div class="d-grid gap-2 mx-auto">
+        <button type="button" class="btn btn-primary btn-lg"
+                th:onclick="|location.href='@{/post/add}'|">글쓰기
+        </button>
+        <br>
+        <div class="row">
+            <div class="col">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>제목 [댓글]</th>
+                        <th>작성자</th>
+                        <th>작성일</th>
+                        <th>좋아요</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr th:each="post : ${postListDto}">
+                        <a href="@{/post/{post_id}(post_id=${post.id})}">
+                            <td th:text="${post.membername}"></td>
+                            <td th:text="|${post.title} [${post.commentNum}]|"></td>
+                            <td th:text="${post.createdDate}"></td>
+                            <td th:text="${post.heartNum}"></td>
+                        </a>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>
