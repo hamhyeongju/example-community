@@ -20,6 +20,7 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    @Transactional
     public void save(MemberJoinDto memberJoinDto) {
 
        if (memberRepository.existsByLoginId(memberJoinDto.getLoginId())) throw new IllegalArgumentException();
@@ -29,6 +30,7 @@ public class MemberService {
                 memberJoinDto.getName().strip()));
     }
 
+    @Transactional
     public void delete(Long member_id) {
         Member member = memberRepository.findById(member_id).orElseThrow(IllegalAccessError::new);
 
