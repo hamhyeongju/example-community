@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
+</head>
+
+<body>
+<div class="container position-absolute top-50 start-50 translate-middle">
+    <hr class="mb-4">
+    <h2 class="text-center">로그인</h2>
+    <br>
+
+    <form th:object="${loginDto}" method="post" th:action="@{/login}">
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <div th:if="${param.error}" th:text="|ID 혹은 비밀번호가 잘못되었습니다.|"></div>
+            <label for="loginId" class="form-label">로그인 ID</label>
+            <input type="text" id="loginId" class="w-100 form-control" th:field="*{username}">
+
+            <label for="password" class="form-label">비밀번호</label>
+            <input type="password" id="password" class="w-100 form-control" th:field="*{password}">
+        </div>
+
+        <div class="m-4 row">
+            <div class="col"></div>
+            <div class="col-4">
+                <button class="w-100 btn btn-success btn-lg" type="submit">로그인</button>
+            </div>
+            <div class="col-4">
+                <button class="w-100 btn btn-outline-secondary btn-lg" type="button"
+                        th:onclick="|location.href='@{/}'|">취소
+                </button>
+            </div>
+            <div class="col"></div>
+        </div>
+    </form>
+    <hr class="mt-4">
+</div>
+</body>
+</html>
