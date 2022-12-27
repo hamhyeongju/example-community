@@ -27,7 +27,7 @@ public class PostService {
         List<Post> find = postRepository.findPostList();
         return find.stream().map(post -> {
             return new PostListDto(post.getId(), post.getTitle(), post.getMember().getName(),
-                    post.getHeartNum(), post.getCommentNum());
+                    post.getHeartNum(), post.getCommentNum(), post.getCreatedDate());
         }).collect(Collectors.toList());
     }
 
