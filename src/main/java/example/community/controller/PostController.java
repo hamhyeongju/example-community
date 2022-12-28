@@ -50,7 +50,7 @@ public class PostController {
      * 게시글 등록 폼
      */
     @GetMapping("/post/add")
-    public String addPostForm(@ModelAttribute PostDto postDto) {
+    public String addPostForm(@ModelAttribute("postDto") PostDto postDto) {
         return "post/addform";
     }
 

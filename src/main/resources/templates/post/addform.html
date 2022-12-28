@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
+</head>
+<body>
+<div class="container position-absolute top-50 start-50 translate-middle">
+    <div class="d-grid gap-2 col-6 mx-auto">
+        <form method="post" th:action="@{/post}" th:object="${postDto}">
+            <fieldset>
+                <legend class="text-center">일정 추가</legend>
+                <br>
+
+                <label class="form-label" th:for="*{title}">제목</label>
+                <input type="text" class="w-100 form-control" placeholder="최대 20자까지 가능합니다"
+                       th:field="*{title}"><br>
+
+                <label class="form-label" th:for="*{body}">내용</label>
+                <textarea class="w-100 form-control" placeholder="최대 100자까지 가능합니다" th:field="*{body}">
+                </textarea>
+                <br>
+
+                <div class="row">
+                    <div class="col-auto me-auto"></div>
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-primary">추가</button>
+                    </div>
+                    <div class="col-auto">
+                        <button type="button" class="btn btn-primary" th:onclick="|location.href='@{/post}'|">취소
+                        </button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+</body>
+</html>
