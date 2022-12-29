@@ -16,7 +16,7 @@ public class PostDto {
     private String title;
     private String body;
     private String membername;
-    private int heartNum;
+    private Integer heartNum;
     private LocalDateTime createdDate;
     private List<CommentDto> commentDtos = new ArrayList<>();
 }
