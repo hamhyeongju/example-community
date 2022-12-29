@@ -30,14 +30,15 @@
                     </thead>
 
                     <tbody>
-                    <a href="@{/post/{post_id}(post_id=${post.id})}">
-                        <tr th:each="post : ${postListDto}">
-                            <td th:text="${post.membername}"></td>
-                            <td th:text="|${post.title} [${post.commentNum}]|"></td>
-                            <td th:text="${post.createdDate}"></td>
-                            <td th:text="${post.heartNum}"></td>
-                        </tr>
-                    </a>
+                    <tr th:each="post : ${postListDto}">
+                        <td th:text="${post.membername}"></td>
+                        <td>
+                            <a th:href="@{/post/{post_id}(post_id=${post.id})}"
+                               th:text="|${post.title} [${post.commentNum}]|"></a>
+                        </td>
+                        <td th:text="${post.createdDate}"></td>
+                        <td th:text="${post.heartNum}"></td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
