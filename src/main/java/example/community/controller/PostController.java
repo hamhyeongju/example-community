@@ -91,7 +91,7 @@ public class PostController {
 
         redirectAttributes.addAttribute("post_id", post_id);
 
-        return "redirect:/{post_id}";
+        return "redirect:/post/{post_id}";
     }
 
     /**
@@ -103,7 +103,7 @@ public class PostController {
         if (post_id != null) postService.delete(post_id);
 
         redirectAttributes.addAttribute("post_id", post_id);
-        return "redirect:/{post_id}";
+        return "redirect:/post/{post_id}";
     }
 
     /**
@@ -117,6 +117,6 @@ public class PostController {
         heartService.changeHeartStatus(post_id, userDetails.getMember().getId());
 
         redirectAttributes.addAttribute("post_id", post_id);
-        return "redirect:/{post_id}";
+        return "redirect:/post/{post_id}";
     }
 }
