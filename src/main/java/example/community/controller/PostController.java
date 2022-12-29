@@ -3,6 +3,7 @@ package example.community.controller;
 import example.community.configuration.security.UserDetailsImpl;
 import example.community.service.HeartService;
 import example.community.service.PostService;
+import example.community.service.dto.CommentDto;
 import example.community.service.dto.PostDto;
 import example.community.service.dto.PostListDto;
 import example.community.service.dto.WritePostDto;
@@ -39,7 +40,7 @@ public class PostController {
      * 게시글 read
      */
     @GetMapping("/post/{post_id}")
-    public String post(@PathVariable Long post_id, Model model) {
+    public String post(@PathVariable Long post_id, Model model, @ModelAttribute("commentDto") CommentDto commentDto) {
         PostDto postDto = postService.findPostAndComment(post_id);
         model.addAttribute("postDto", postDto);
 
@@ -108,7 +109,7 @@ public class PostController {
     /**
      * 좋아요 기능
      */
-    @PostMapping("/post/{post_id}/like")
+    @PostMapping("/post/{post_id}/heart")
     public String changeHeartStatus(@PathVariable Long post_id,
                        @AuthenticationPrincipal UserDetailsImpl userDetails,
                        RedirectAttributes redirectAttributes) {
