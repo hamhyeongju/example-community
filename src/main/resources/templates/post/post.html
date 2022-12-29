@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
+</head>
+<body>
+<div class="container position-absolute top-50 start-50 translate-middle">
+
+    <div class="d-grid gap-2 col-10 mx-auto" th:object="${postDto}">
+        <div class="row">
+            <h1 class="text-center" th:text="*{title}"></h1>
+        </div>
+        <div class="row">
+            <div class="col" th:text="*{membername}"></div>
+            <div class="col" th:text="' | ' + *{createdDate}"></div>
+            <div class="col" th:text="' | ' + *{heartNum}"></div>
+        </div>
+        <div class="row">
+            <hr class="mb-5">
+        </div>
+        <div class="row">
+            <div class="col-1"></div>
+            <h4 class="col-8" th:text="*{body}"></h4>
+            <div class="col-1"></div>
+        </div>
+        <div class="row">
+            <div class="col-5"></div>
+            <form th:action="@{/post/{post_id}/heart(post_id=*{id})}" method="post">
+                <div class="col-2">
+                    <button type="submit" class="btn btn-outline-danger">좋아요</button>
+                </div>
+            </form>
+            <div class="col-5"></div>
+
+        </div>
+        <div class="row">
+            <hr class="mb-5 mt-5">
+        </div>
+        <div class="row">
+            <fieldset>
+                <form th:action="@{/post/{post_id}/comment(post_id=${post_id})}" method="post"
+                      th:object="${commentDto}">
+                    <legend class="text-center">댓글 작성</legend>
+                    <br>
+                    <div class="row">
+                        <div class="col-11">
+                            <textarea class="w-100 form-control" th:field="${commentDto.body}"></textarea>
+                        </div>
+                        <div class="col-1">
+                            <div class="d-grid gap">
+                                <button type="submit" class="btn btn-primary">추가</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </fieldset>
+            <hr class="mb-5 mt-5">
+            <div class="row">
+                <div class="col">
+                    <table class="table">
+                        <tbody>
+                        <tr th:each="comment : ${postDto.commentDtos}">
+                            <td th:text="${comment.membername} + ' | ' + ${comment.body}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>
