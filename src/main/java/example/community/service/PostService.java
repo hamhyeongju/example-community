@@ -35,7 +35,7 @@ public class PostService {
         Post findPost = postRepository.findById(post_id).orElseThrow(IllegalAccessError::new);
 
         List<CommentDto> commentDtos = findPost.getComments().stream().map(comment -> {
-            return new CommentDto(comment.getId(), comment.getBody(), comment.getMember().getName());
+            return new CommentDto(comment.getId(), comment.getBody(), comment.getMember().getId(), comment.getMember().getName());
         }).collect(Collectors.toList());
 
         return new PostDto(findPost.getId(), findPost.getTitle(), findPost.getBody(), findPost.getMember().getId(), findPost.getMember().getName(), findPost.getHeartNum(), findPost.getCreatedDate(), commentDtos);
