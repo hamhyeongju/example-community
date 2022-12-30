@@ -5,7 +5,10 @@ import example.community.service.CommentService;
 import example.community.service.dto.CommentDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.parameters.P;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -27,6 +30,14 @@ public class CommentController {
         redirectAttributes.addAttribute("post_id", post_id);
 
         return "redirect:/post/{post_id}";
+    }
+
+    @GetMapping("/post/{post_id}/comment/{comment_id}")
+    public String editForm(@PathVariable Long comment_id, Model model) {
+        CommentDto commentDto = commentService.findCommentDto(comment_id);
+        model.addAttribute("commentDto", commentDto);
+
+        return "comment/editform";
     }
 
     /**
