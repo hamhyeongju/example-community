@@ -43,7 +43,7 @@ public class PostService {
 
     public WritePostDto findWritePostDto(Long post_id) {
         Post findPost = postRepository.findById(post_id).orElseThrow(IllegalAccessError::new);
-        return new WritePostDto(findPost.getTitle(), findPost.getBody());
+        return new WritePostDto(findPost.getId(), findPost.getTitle(), findPost.getBody());
     }
 
     @Transactional

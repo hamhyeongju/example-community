@@ -9,6 +9,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class WritePostDto {
 
+    private Long id;
     private String title;
     private String body;
 }
