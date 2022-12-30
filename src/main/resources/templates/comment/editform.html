@@ -7,13 +7,10 @@
 <body>
 <div class="container position-absolute top-50 start-50 translate-middle">
     <div class="d-grid gap-2 col-6 mx-auto">
-        <form th:action="@{/post/{post_id}(post_id=${post_id})}" th:object="${postDto}" th:method="put">
+        <form th:action="@{/post/{post_id}/comment/{comment_id}(post_id=${post_id}, comment_id=${comment_id})}" th:object="${commentDto}" th:method="put">
             <fieldset>
-                <legend class="text-center">게시글 수정</legend>
+                <legend class="text-center">댓글 수정</legend>
                 <br>
-
-                <label class="form-label" th:for="*{title}">제목</label>
-                <input type="text" class="w-100 form-control" th:field="*{title}"><br>
 
                 <label class="form-label" th:for="*{body}">내용</label>
                 <textarea class="w-100 form-control" th:field="*{body}"></textarea>
@@ -25,7 +22,7 @@
                         <button type="submit" class="btn btn-primary">수정</button>
                     </div>
                     <div class="col-auto">
-                        <button type="button" class="btn btn-primary" th:onclick="|location.href='@{/post}'|">취소
+                        <button type="button" class="btn btn-primary" th:onclick="|location.href='@{/post/{post_id}(post_id=${post_id})}'|">취소
                         </button>
                     </div>
                 </div>
