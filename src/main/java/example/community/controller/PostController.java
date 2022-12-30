@@ -63,7 +63,7 @@ public class PostController {
         WritePostDto writePostDto = postService.findWritePostDto(post_id);
         model.addAttribute("postDto", writePostDto);
 
-        return "post/{post_id}editform";
+        return "post/editform";
     }
 
     /**
