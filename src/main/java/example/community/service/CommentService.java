@@ -42,4 +42,9 @@ public class CommentService {
         commentRepository.deleteById(comment_id);
         post.minusCommentNum();
     }
+
+    public CommentDto findCommentDto(Long comment_id) {
+        Comment comment = commentRepository.findById(comment_id).orElseThrow(IllegalArgumentException::new);
+        return new CommentDto(comment.getId(), comment.getBody());
+    }
 }
