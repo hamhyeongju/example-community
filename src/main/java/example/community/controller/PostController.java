@@ -101,12 +101,10 @@ public class PostController {
      * 게시글 삭제
      */
     @DeleteMapping("/post/{post_id}")
-    public String deletePost(@PathVariable Long post_id,
-                             RedirectAttributes redirectAttributes) {
+    public String deletePost(@PathVariable Long post_id) {
         if (post_id != null) postService.delete(post_id);
 
-        redirectAttributes.addAttribute("post_id", post_id);
-        return "redirect:/post/{post_id}";
+        return "redirect:/post";
     }
 
     /**
