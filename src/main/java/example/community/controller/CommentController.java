@@ -33,7 +33,7 @@ public class CommentController {
     }
 
     @GetMapping("/post/{post_id}/comment/{comment_id}")
-    public String editForm(@PathVariable Long comment_id, Model model) {
+    public String editForm(@PathVariable Long post_id, @PathVariable Long comment_id, Model model) {
         CommentDto commentDto = commentService.findCommentDto(comment_id);
         model.addAttribute("commentDto", commentDto);
 
