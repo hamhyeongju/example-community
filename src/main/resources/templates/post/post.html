@@ -22,7 +22,9 @@
         <div class="row" th:if="${postDto.getMember_id().equals(guest_id)}">
             <div class="col-10"></div>
             <div class="col">
-                <button type="button" th:onclick="|location.href='@{/post/{post_id}/edit(post_id=${post_id})}'|" class="btn btn-link">수정</button>
+                <button type="button" th:onclick="|location.href='@{/post/{post_id}/edit(post_id=${post_id})}'|"
+                        class="btn btn-link">수정
+                </button>
             </div>
             <div class="col">
                 <form th:action="@{/post/{post_id}(post_id=${post_id})}" th:method="delete">
@@ -72,7 +74,24 @@
                     <table class="table">
                         <tbody>
                         <tr th:each="comment : ${postDto.commentDtos}">
-                            <td th:text="${comment.membername} + ' | ' + ${comment.body}"></td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-10">
+                                        <p th:text="${comment.membername} + ' | ' + ${comment.body}"></p>
+                                    </div>
+                                        <div class="col" th:if="${postDto.getMember_id().equals(guest_id)}">
+                                            <button type="button"
+                                                    th:onclick="|location.href='@{/post/{post_id}/comment/{comment_id}(post_id=${post_id}, comment_id=${comment.id})}'|"
+                                                    class="btn btn-link">수정
+                                            </button>
+                                        </div>
+                                        <div class="col" th:if="${postDto.getMember_id().equals(guest_id)}">
+                                            <form th:action="@{/post/{post_id}(post_id=${post_id})}" th:method="delete">
+                                                <button type="submit" class="btn btn-link">삭제</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                            </td>
                         </tr>
                         </tbody>
                     </table>
