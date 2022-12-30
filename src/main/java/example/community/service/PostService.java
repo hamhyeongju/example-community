@@ -38,7 +38,7 @@ public class PostService {
             return new CommentDto(comment.getId(), comment.getBody(), comment.getMember().getName());
         }).collect(Collectors.toList());
 
-        return new PostDto(findPost.getId(), findPost.getTitle(), findPost.getBody(), findPost.getMember().getName(), findPost.getHeartNum(), findPost.getCreatedDate(), commentDtos);
+        return new PostDto(findPost.getId(), findPost.getTitle(), findPost.getBody(), findPost.getMember().getId(), findPost.getMember().getName(), findPost.getHeartNum(), findPost.getCreatedDate(), commentDtos);
     }
 
     public WritePostDto findWritePostDto(Long post_id) {

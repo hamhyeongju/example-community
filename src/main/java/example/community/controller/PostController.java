@@ -40,9 +40,12 @@ public class PostController {
      * 게시글 read
      */
     @GetMapping("/post/{post_id}")
-    public String post(@PathVariable Long post_id, Model model, @ModelAttribute("commentDto") CommentDto commentDto) {
+    public String post(@PathVariable Long post_id, Model model,
+                       @ModelAttribute("commentDto") CommentDto commentDto,
+                       @AuthenticationPrincipal UserDetailsImpl userDetails) {
         PostDto postDto = postService.findPostAndComment(post_id);
         model.addAttribute("postDto", postDto);
+        model.addAttribute("guest_id", userDetails.getMember().getId());
 
         return "post/post";
     }

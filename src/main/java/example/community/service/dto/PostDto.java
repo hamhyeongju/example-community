@@ -15,6 +15,7 @@ public class PostDto {
     private Long id;
     private String title;
     private String body;
+    private Long member_id;
     private String membername;
     private Integer heartNum;
     private LocalDateTime createdDate;
