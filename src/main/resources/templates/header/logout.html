@@ -7,6 +7,8 @@
 <body>
 <div class="col offset-10" th:fragment="logout">
     <form th:action="@{/logout}" method="post">
+        <button type="button" class="mt-2 col-auto btn btn-light"
+                th:onclick="|location.href='@{/post}'|">게시판</button>
         <button type="submit" class="mt-2 col-auto btn btn-light">로그아웃</button>
     </form>
 </div>
