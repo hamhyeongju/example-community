@@ -1,14 +1,12 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
 </head>
 <body>
-<div sec:authorize="isAuthenticated()">
-    <div th:replace="~{header/logout :: logout}"></div>
-</div>
+<div th:replace="~{header/logout :: logout}"></div>
+
 <br>
 <!--<div class="container position-absolute top-50 start-50 translate-middle">-->
 <div class="px-5 gap-2 col mx-auto">
