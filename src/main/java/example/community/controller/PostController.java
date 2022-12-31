@@ -29,7 +29,7 @@ public class PostController {
      * 게시글리스트 read
      */
     @GetMapping("/post")
-    public String post(Model model) {
+    public String postList(Model model) {
         List<PostListDto> postList = postService.findList();
         model.addAttribute("postListDto", postList);
 
