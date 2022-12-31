@@ -1,7 +1,9 @@
 package example.community.configuration;
 
+import example.community.configuration.interceptor.CommentInterceptor;
 import example.community.configuration.interceptor.PostInterceptor;
 import example.community.domain.Post;
+import example.community.service.CommentService;
 import example.community.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -17,6 +19,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class Configurer implements WebMvcConfigurer {
 
     private final PostService postService;
+    private final CommentService commentService;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -47,5 +50,9 @@ public class Configurer implements WebMvcConfigurer {
                 .order(1)
                 .excludePathPatterns("/post/add")
                 .addPathPatterns("/post/edit/{post_id}", "/post/{post_id}");
+
+        registry.addInterceptor(new CommentInterceptor(commentService))
+                .order(2)
+                .addPathPatterns("/post/{post_id}/comment/{comment_id}/**");
     }
 }
