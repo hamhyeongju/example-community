@@ -65,4 +65,8 @@ public class PostService {
     public void delete(Long post_id) {
         postRepository.deleteById(post_id);
     }
+
+    public Post findPostForInterceptor(Long postId) {
+        return postRepository.findById(postId).orElseThrow(IllegalArgumentException::new);
+    }
 }
