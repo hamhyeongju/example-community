@@ -47,4 +47,8 @@ public class CommentService {
         Comment comment = commentRepository.findById(comment_id).orElseThrow(IllegalArgumentException::new);
         return new CommentDto(comment.getId(), comment.getBody());
     }
+
+    public Comment findCommentForInterceptor(Long comment_id) {
+        return commentRepository.findById(comment_id).orElseThrow(IllegalArgumentException::new);
+    }
 }
