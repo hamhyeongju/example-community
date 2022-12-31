@@ -31,8 +31,6 @@ public class CommentInterceptor implements HandlerInterceptor {
 
         HandlerMethod method = (HandlerMethod) handler;
 
-
-        // 요청 uri에서 id 값을 파싱
         int pos = requestURI.lastIndexOf("/");
         Long comment_id = Long.parseLong(requestURI.substring(pos + 1));
 

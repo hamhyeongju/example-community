@@ -19,10 +19,4 @@ public class CommentDto {
         this.id = id;
         this.body = body;
     }
-
-    public CommentDto(Long id, String body, String membername) {
-        this.id = id;
-        this.body = body;
-        this.membername = membername;
-    }
 }

@@ -25,28 +25,21 @@ public class PostInterceptor implements HandlerInterceptor {
 
     private final PostService postService;
 
-    private final String POST = "public java.lang.String example.community.controller.PostController.post(java.lang.Long,org.springframework.ui.Model,example.community.service.dto.CommentDto,example.community.configuration.security.UserDetailsImpl)";
-
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String requestURI = request.getRequestURI();
-//        Member loginMember = (Member) request.getSession(false).getAttribute("loginMember");
 
-        // SecurityContextHolder로 부터 사용자 정보를 얻음
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserDetailsImpl userDetails = (UserDetailsImpl) principal;
         Member loginMember = userDetails.getMember();
 
         HandlerMethod method = (HandlerMethod) handler;
 
-
-        // 요청 uri에서 id 값을 파싱
         int pos = requestURI.lastIndexOf("/");
         Long postId = Long.parseLong(requestURI.substring(pos + 1));
 
-        if (method.getMethod().toString().equals(POST)) {
-            return true;
-        }
+        if (method.getMethod().getName().equals("post")) return true;
+
 
         Post post = postService.findPostForInterceptor(postId);
         if (!post.getMember().getId().equals(loginMember.getId())) {
