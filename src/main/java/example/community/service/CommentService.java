@@ -22,8 +22,8 @@ public class CommentService {
 
     @Transactional
     public void save(CommentDto commentDto, Long post_id, Long member_id) {
-        Post post = postRepository.findById(post_id).orElseThrow(IllegalAccessError::new);
-        Member member = memberRepository.findById(member_id).orElseThrow(IllegalAccessError::new);
+        Post post = postRepository.findById(post_id).orElseThrow(IllegalArgumentException::new);
+        Member member = memberRepository.findById(member_id).orElseThrow(IllegalArgumentException::new);
 
         Comment comment = Comment.createComment(commentDto.getBody(), member, post);
         commentRepository.save(comment);
@@ -32,13 +32,13 @@ public class CommentService {
 
     @Transactional
     public void update(Long comment_id, CommentDto commentDto) {
-        Comment comment = commentRepository.findById(comment_id).orElseThrow(IllegalAccessError::new);
+        Comment comment = commentRepository.findById(comment_id).orElseThrow(IllegalArgumentException::new);
         comment.update(commentDto.getBody());
     }
 
     @Transactional
     public void delete(Long comment_id, Long post_id) {
-        Post post = postRepository.findById(post_id).orElseThrow(IllegalAccessError::new);
+        Post post = postRepository.findById(post_id).orElseThrow(IllegalArgumentException::new);
         commentRepository.deleteById(comment_id);
         post.minusCommentNum();
     }

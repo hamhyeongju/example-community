@@ -32,7 +32,7 @@ public class MemberService {
 
     @Transactional
     public void delete(Long member_id) {
-        Member member = memberRepository.findById(member_id).orElseThrow(IllegalAccessError::new);
+        Member member = memberRepository.findById(member_id).orElseThrow(IllegalArgumentException::new);
 
         List<Comment> comments = member.getComments();
         comments.forEach(comment -> comment.getPost().minusCommentNum());

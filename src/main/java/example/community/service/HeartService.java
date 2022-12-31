@@ -28,8 +28,8 @@ public class HeartService {
                     heart.getPost().minusHeartNum();
                 },
                 () -> {
-                    Post post = postRepository.findById(post_id).orElseThrow(IllegalAccessError::new);
-                    Member member = memberRepository.findById(member_id).orElseThrow(IllegalAccessError::new);
+                    Post post = postRepository.findById(post_id).orElseThrow(IllegalArgumentException::new);
+                    Member member = memberRepository.findById(member_id).orElseThrow(IllegalArgumentException::new);
 
                     heartRepository.save(Heart.createHeart(post, member));
                     post.plusHeartNum();

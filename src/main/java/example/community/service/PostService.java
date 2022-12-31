@@ -32,7 +32,7 @@ public class PostService {
     }
 
     public PostDto findPostAndComment(Long post_id) {
-        Post findPost = postRepository.findById(post_id).orElseThrow(IllegalAccessError::new);
+        Post findPost = postRepository.findById(post_id).orElseThrow(IllegalArgumentException::new);
 
         List<CommentDto> commentDtos = findPost.getComments().stream().map(comment -> {
             return new CommentDto(comment.getId(), comment.getBody(), comment.getMember().getId(), comment.getMember().getName());
@@ -42,13 +42,13 @@ public class PostService {
     }
 
     public WritePostDto findWritePostDto(Long post_id) {
-        Post findPost = postRepository.findById(post_id).orElseThrow(IllegalAccessError::new);
+        Post findPost = postRepository.findById(post_id).orElseThrow(IllegalArgumentException::new);
         return new WritePostDto(findPost.getId(), findPost.getTitle(), findPost.getBody());
     }
 
     @Transactional
     public Long createPost(WritePostDto writePostDto, Long id) {
-        Member findMember = memberRepository.findById(id).orElseThrow(IllegalAccessError::new);
+        Member findMember = memberRepository.findById(id).orElseThrow(IllegalArgumentException::new);
 
         Post post = Post.createPost(writePostDto.getTitle(), writePostDto.getBody(), findMember);
 
@@ -57,7 +57,7 @@ public class PostService {
 
     @Transactional
     public void updatePost(Long post_id, WritePostDto writePostDto) {
-        Post post = postRepository.findById(post_id).orElseThrow(IllegalAccessError::new);
+        Post post = postRepository.findById(post_id).orElseThrow(IllegalArgumentException::new);
         post.update(writePostDto.getTitle(), writePostDto.getBody());
     }
 
