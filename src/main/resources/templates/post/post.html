@@ -22,7 +22,7 @@
         <div class="row" th:if="${postDto.getMember_id().equals(guest_id)}">
             <div class="col-10"></div>
             <div class="col">
-                <button type="button" th:onclick="|location.href='@{/post/{post_id}/edit(post_id=${post_id})}'|"
+                <button type="button" th:onclick="|location.href='@{/post/edit/{post_id}(post_id=${post_id})}'|"
                         class="btn btn-link">수정
                 </button>
             </div>

@@ -61,7 +61,7 @@ public class PostController {
     /**
      * 게시글 수정 폼
      */
-    @GetMapping("/post/{post_id}/edit")
+    @GetMapping("/post/edit/{post_id}")
     public String editPostForm(@PathVariable Long post_id, Model model) {
         WritePostDto writePostDto = postService.findWritePostDto(post_id);
         model.addAttribute("postDto", writePostDto);
