@@ -32,7 +32,10 @@ public class CommentController {
         return "redirect:/post/{post_id}";
     }
 
-    @GetMapping("/post/{post_id}/comment/{comment_id}")
+    /**
+     * 댓글 수정 폼
+     */
+    @GetMapping("/post/{post_id}/comment/edit/{comment_id}")
     public String editForm(@PathVariable Long post_id, @PathVariable Long comment_id, Model model) {
         CommentDto commentDto = commentService.findCommentDto(comment_id);
         model.addAttribute("commentDto", commentDto);
@@ -64,6 +67,4 @@ public class CommentController {
 
         return "redirect:/post/{post_id}";
     }
-
-
 }

@@ -81,7 +81,7 @@
                                     </div>
                                         <div class="col" th:if="${comment.getMember_id().equals(guest_id)}">
                                             <button type="button"
-                                                    th:onclick="|location.href='@{/post/{post_id}/comment/{comment_id}(post_id=${post_id}, comment_id=${comment.id})}'|"
+                                                    th:onclick="|location.href='@{/post/{post_id}/comment/edit/{comment_id}(post_id=${post_id}, comment_id=${comment.id})}'|"
                                                     class="btn btn-link">수정
                                             </button>
                                         </div>
