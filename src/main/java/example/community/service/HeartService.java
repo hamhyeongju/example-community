@@ -23,16 +23,12 @@ public class HeartService {
     public void changeHeartStatus(Long post_id, Long member_id) {
 
         heartRepository.findByMemberIdAndPostId(post_id, member_id).ifPresentOrElse(
-                heart -> {
-                    heartRepository.delete(heart);
-                    heart.getPost().minusHeartNum();
-                },
+                heart -> heartRepository.delete(heart),
                 () -> {
                     Post post = postRepository.findById(post_id).orElseThrow(IllegalArgumentException::new);
                     Member member = memberRepository.findById(member_id).orElseThrow(IllegalArgumentException::new);
 
                     heartRepository.save(Heart.createHeart(post, member));
-                    post.plusHeartNum();
                 });
     }
 }

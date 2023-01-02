@@ -27,7 +27,6 @@ public class CommentService {
 
         Comment comment = Comment.createComment(commentDto.getBody(), member, post);
         commentRepository.save(comment);
-        post.plusCommentNum();
     }
 
     @Transactional
@@ -40,7 +39,6 @@ public class CommentService {
     public void delete(Long comment_id, Long post_id) {
         Post post = postRepository.findById(post_id).orElseThrow(IllegalArgumentException::new);
         commentRepository.deleteById(comment_id);
-        post.minusCommentNum();
     }
 
     public CommentDto findCommentDto(Long comment_id) {
