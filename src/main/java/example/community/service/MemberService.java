@@ -34,12 +34,6 @@ public class MemberService {
     public void delete(Long member_id) {
         Member member = memberRepository.findById(member_id).orElseThrow(IllegalArgumentException::new);
 
-        List<Comment> comments = member.getComments();
-        comments.forEach(comment -> comment.getPost().minusCommentNum());
-
-        List<Heart> hearts = member.getHearts();
-        hearts.forEach(like -> like.getPost().minusHeartNum());
-
         memberRepository.delete(member);
     }
 }
