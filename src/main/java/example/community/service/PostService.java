@@ -27,7 +27,7 @@ public class PostService {
         List<Post> find = postRepository.findPostList();
         return find.stream().map(post -> {
             return new PostListDto(post.getId(), post.getTitle(), post.getMember().getName(),
-                    post.getHeartNum(), post.getCommentNum(), post.getCreatedDate());
+                    post.getHearts().size(), post.getComments().size(), post.getCreatedDate());
         }).collect(Collectors.toList());
     }
 
@@ -38,7 +38,7 @@ public class PostService {
             return new CommentDto(comment.getId(), comment.getBody(), comment.getMember().getId(), comment.getMember().getName());
         }).collect(Collectors.toList());
 
-        return new PostDto(findPost.getId(), findPost.getTitle(), findPost.getBody(), findPost.getMember().getId(), findPost.getMember().getName(), findPost.getHeartNum(), findPost.getCreatedDate(), commentDtos);
+        return new PostDto(findPost.getId(), findPost.getTitle(), findPost.getBody(), findPost.getMember().getId(), findPost.getMember().getName(), findPost.getHearts().size(), findPost.getCreatedDate(), commentDtos);
     }
 
     public WritePostDto findWritePostDto(Long post_id) {
