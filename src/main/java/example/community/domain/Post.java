@@ -21,11 +21,9 @@ public class Post extends BaseTimeEntity {
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
     private List<Heart> hearts = new ArrayList<>();
-    private int heartNum;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
     private List<Comment> comments = new ArrayList<>();
-    private int commentNum;
 
     @ManyToOne(fetch = FetchType.LAZY) @JoinColumn(name = "member_id")
     private Member member;
@@ -34,8 +32,6 @@ public class Post extends BaseTimeEntity {
         Post post = new Post();
         post.title = title;
         post.body = body;
-        post.heartNum = 0;
-        post.commentNum = 0;
 
         post.member = member;
         member.getPosts().add(post);
@@ -48,19 +44,4 @@ public class Post extends BaseTimeEntity {
         this.body = body;
     }
 
-    public void minusHeartNum() {
-        this.heartNum--;
-    }
-
-    public void plusHeartNum() {
-        this.heartNum++;
-    }
-
-    public void minusCommentNum() {
-        this.commentNum--;
-    }
-
-    public void plusCommentNum() {
-        this.commentNum++;
-    }
 }
