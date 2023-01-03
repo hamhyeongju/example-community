@@ -1,10 +1,12 @@
 package example.community.controller;
 
+import example.community.configuration.security.UserDetailsImpl;
 import example.community.service.MemberService;
 import example.community.service.dto.LoginDto;
 import example.community.service.dto.MemberJoinDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -45,8 +47,12 @@ public class MemberController {
      * 회원탈퇴
      */
     @DeleteMapping("/member/{member_id}")
-    public String deleteMember(@PathVariable Long member_id) {
-        memberService.delete(member_id);
+    public String deleteMember(@PathVariable Long member_id, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        if (member_id.equals(userDetails.getMember().getId())) {
+            memberService.delete(member_id);
+            SecurityContextHolder.clearContext();
+        }
+
         return "redirect:/";
     }
 
