@@ -2,6 +2,8 @@ package example.community.service;
 
 import example.community.domain.Member;
 import example.community.domain.Post;
+import example.community.repository.CommentRepository;
+import example.community.repository.HeartRepository;
 import example.community.repository.MemberRepository;
 import example.community.repository.PostRepository;
 import example.community.service.dto.CommentDto;
@@ -22,6 +24,8 @@ public class PostService {
 
     private final PostRepository postRepository;
     private final MemberRepository memberRepository;
+    private final CommentRepository commentRepository;
+    private final HeartRepository heartRepository;
 
     public List<PostListDto> findList() {
         List<Post> find = postRepository.findPostList();
@@ -63,7 +67,9 @@ public class PostService {
 
     @Transactional
     public void delete(Long post_id) {
-        postRepository.deleteById(post_id);
+        heartRepository.deleteByPostId(post_id);
+        commentRepository.deleteByPostId(post_id);
+        postRepository.deleteByPostId(post_id);
     }
 
     public Post findPostForInterceptor(Long postId) {
