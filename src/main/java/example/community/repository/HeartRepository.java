@@ -16,4 +16,8 @@ public interface HeartRepository extends JpaRepository<Heart, Long> {
     @Modifying
     @Query("delete from Heart h where h.post.id = :post_id")
     void deleteByPostId(@Param("post_id") Long post_id);
+
+    @Modifying
+    @Query("delete from Heart h where h.member.id = :member_id")
+    void deleteByMemberId(@Param("member_id") Long member_id);
 }
