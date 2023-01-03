@@ -15,17 +15,21 @@
     <h2 class="text-center">홈 화면</h2>
     <br>
     <div class="d-grid gap-2 col-6 mx-auto">
-        <button class="w-100 btn btn-secondary btn-lg" type="button"
-                th:onclick="|location.href='@{/join}'|">
+        <button class="w-100 btn btn-secondary btn-lg" sec:authorize="isAnonymous()"
+                th:onclick="|location.href='@{/join}'|" type="button">
             회원 가입
         </button>
         <button class="w-100 btn btn-secondary btn-lg" sec:authorize="isAnonymous()"
-                onclick="location.href='items.html'"
                 th:onclick="|location.href='@{/login}'|" type="button">
             로그인
         </button>
+
+        <form th:action="@{/member/{member_id}(member_id=${member_id})}" th:method="delete">
+            <button class="w-100 btn btn-secondary btn-lg" sec:authorize="isAuthenticated()" type="submit">
+                회원 탈퇴
+            </button>
+        </form>
         <button class="w-100 btn btn-secondary btn-lg" sec:authorize="isAuthenticated()"
-                onclick="location.href='items.html'"
                 th:onclick="|location.href='@{/post}'|" type="button">
             게시판
         </button>
