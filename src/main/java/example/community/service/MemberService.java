@@ -1,16 +1,15 @@
 package example.community.service;
 
-import example.community.domain.Comment;
-import example.community.domain.Heart;
 import example.community.domain.Member;
+import example.community.repository.CommentRepository;
+import example.community.repository.HeartRepository;
 import example.community.repository.MemberRepository;
+import example.community.repository.PostRepository;
 import example.community.service.dto.MemberJoinDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
@@ -18,6 +17,9 @@ import java.util.List;
 public class MemberService {
 
     private final MemberRepository memberRepository;
+    private final PostRepository postRepository;
+    private final CommentRepository commentRepository;
+    private final HeartRepository heartRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Transactional
@@ -32,8 +34,9 @@ public class MemberService {
 
     @Transactional
     public void delete(Long member_id) {
-        Member member = memberRepository.findById(member_id).orElseThrow(IllegalArgumentException::new);
-
-        memberRepository.delete(member);
+        heartRepository.deleteByMemberId(member_id);
+        commentRepository.deleteByMemberId(member_id);
+        postRepository.deleteByMemberId(member_id);
+        memberRepository.deleteByMemberId(member_id);
     }
 }
