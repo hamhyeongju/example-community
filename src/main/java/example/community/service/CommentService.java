@@ -7,6 +7,7 @@ import example.community.repository.CommentRepository;
 import example.community.repository.MemberRepository;
 import example.community.repository.PostRepository;
 import example.community.service.dto.CommentDto;
+import example.community.service.dto.EditCommentDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,9 +42,9 @@ public class CommentService {
         commentRepository.deleteById(comment_id);
     }
 
-    public CommentDto findCommentDto(Long comment_id) {
+    public EditCommentDto findCommentDto(Long comment_id) {
         Comment comment = commentRepository.findById(comment_id).orElseThrow(IllegalArgumentException::new);
-        return new CommentDto(comment.getId(), comment.getBody());
+        return new EditCommentDto(comment.getId(), comment.getBody());
     }
 
     public Comment findCommentForInterceptor(Long comment_id) {

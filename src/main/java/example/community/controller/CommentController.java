@@ -3,6 +3,7 @@ package example.community.controller;
 import example.community.configuration.security.UserDetailsImpl;
 import example.community.service.CommentService;
 import example.community.service.dto.CommentDto;
+import example.community.service.dto.EditCommentDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.parameters.P;
@@ -37,7 +38,7 @@ public class CommentController {
      */
     @GetMapping("/post/{post_id}/comment/edit/{comment_id}")
     public String editForm(@PathVariable Long post_id, @PathVariable Long comment_id, Model model) {
-        CommentDto commentDto = commentService.findCommentDto(comment_id);
+        EditCommentDto commentDto = commentService.findCommentDto(comment_id);
         model.addAttribute("commentDto", commentDto);
 
         return "comment/editform";
