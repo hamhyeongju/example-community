@@ -17,9 +17,9 @@ import org.springframework.transaction.annotation.Transactional;
 public class MemberService {
 
     private final MemberRepository memberRepository;
-    private final PostRepository postRepository;
     private final CommentRepository commentRepository;
     private final HeartRepository heartRepository;
+    private final PostService postService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Transactional
@@ -34,9 +34,9 @@ public class MemberService {
 
     @Transactional
     public void delete(Long member_id) {
+        postService.deleteByMemberId(member_id);
         heartRepository.deleteByMemberId(member_id);
         commentRepository.deleteByMemberId(member_id);
-        postRepository.deleteByMemberId(member_id);
         memberRepository.deleteByMemberId(member_id);
     }
 }
