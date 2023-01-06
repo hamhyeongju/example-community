@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface HeartRepository extends JpaRepository<Heart, Long> {
@@ -20,4 +21,8 @@ public interface HeartRepository extends JpaRepository<Heart, Long> {
     @Modifying
     @Query("delete from Heart h where h.member.id = :member_id")
     void deleteByMemberId(@Param("member_id") Long member_id);
+
+    @Modifying
+    @Query("delete from Heart h where h.post.id in :post_ids")
+    void deleteByPostIds(@Param("post_ids") List<Long> postIds);
 }
