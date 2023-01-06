@@ -72,6 +72,16 @@ public class PostService {
         postRepository.deleteByPostId(post_id);
     }
 
+    @Transactional
+    public void deleteByMemberId(Long member_id) {
+        List<Post> findPosts = postRepository.findAllByMemberId(member_id);
+        List<Long> postIds = findPosts.stream().map(post -> {return post.getId();}).collect(Collectors.toList());
+
+        heartRepository.deleteByPostIds(postIds);
+        commentRepository.deleteByPostIds(postIds);
+        postRepository.deleteByPostIds(postIds);
+    }
+
     public Post findPostForInterceptor(Long postId) {
         return postRepository.findById(postId).orElseThrow(IllegalArgumentException::new);
     }
