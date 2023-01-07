@@ -49,10 +49,10 @@ public class Configurer implements WebMvcConfigurer {
         registry.addInterceptor(new PostInterceptor(postService))
                 .order(1)
                 .excludePathPatterns("/post/add")
-                .addPathPatterns("/post/edit/{post_id}", "/post/{post_id}");
+                .addPathPatterns("/post/edit/*", "/post/*");
 
         registry.addInterceptor(new CommentInterceptor(commentService))
                 .order(2)
-                .addPathPatterns("/post/{post_id}/comment/{comment_id}/**");
+                .addPathPatterns("/post/*/comment/edit/*", "/post/*/comment/*");
     }
 }

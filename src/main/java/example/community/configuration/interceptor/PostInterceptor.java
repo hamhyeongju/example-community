@@ -10,11 +10,14 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.HandlerMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -39,7 +42,6 @@ public class PostInterceptor implements HandlerInterceptor {
         Long postId = Long.parseLong(requestURI.substring(pos + 1));
 
         if (method.getMethod().getName().equals("post")) return true;
-
 
         Post post = postService.findPostForInterceptor(postId);
         if (!post.getMember().getId().equals(loginMember.getId())) {

@@ -29,8 +29,6 @@ public class CommentInterceptor implements HandlerInterceptor {
         UserDetailsImpl userDetails = (UserDetailsImpl) principal;
         Member loginMember = userDetails.getMember();
 
-        HandlerMethod method = (HandlerMethod) handler;
-
         int pos = requestURI.lastIndexOf("/");
         Long comment_id = Long.parseLong(requestURI.substring(pos + 1));
 
