@@ -24,7 +24,6 @@ public class Configurer implements WebMvcConfigurer {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/", "/join", "/login", "/member/**", "/error", "/css/**", "/js/**").permitAll()
                 .antMatchers("/post/**").authenticated()
