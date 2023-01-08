@@ -11,6 +11,9 @@ import example.community.service.dto.PostDto;
 import example.community.service.dto.PostListDto;
 import example.community.service.dto.WritePostDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,12 +30,9 @@ public class PostService {
     private final CommentRepository commentRepository;
     private final HeartRepository heartRepository;
 
-    public List<PostListDto> findList() {
-        List<Post> find = postRepository.findPostList();
-        return find.stream().map(post -> {
-            return new PostListDto(post.getId(), post.getTitle(), post.getMember().getName(),
-                    post.getHearts().size(), post.getComments().size(), post.getCreatedDate());
-        }).collect(Collectors.toList());
+    public Page<PostListDto> findList(Pageable pageable) {
+        Page<Post> find = postRepository.findPostList(pageable);
+        return find.map(PostListDto::new);
     }
 
     public PostDto findPostAndComment(Long post_id) {

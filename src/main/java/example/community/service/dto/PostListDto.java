@@ -1,5 +1,6 @@
 package example.community.service.dto;
 
+import example.community.domain.Post;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,4 +17,13 @@ public class PostListDto {
     private int HeartNum;
     private int commentNum;
     private LocalDateTime createdDate;
+
+    public PostListDto(Post post) {
+        this.id = post.getId();
+        this.title = post.getTitle();
+        this.membername = post.getMember().getName();
+        this.HeartNum = post.getHearts().size();
+        this.commentNum = post.getComments().size();
+        this.createdDate = post.getCreatedDate();
+    }
 }

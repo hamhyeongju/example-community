@@ -7,7 +7,13 @@ import example.community.service.dto.CommentDto;
 import example.community.service.dto.PostDto;
 import example.community.service.dto.PostListDto;
 import example.community.service.dto.WritePostDto;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,15 +29,34 @@ public class PostController {
     private final PostService postService;
     private final HeartService heartService;
 
+    private static int getStartPage(Page<PostListDto> postList) {
+        if (postList.getNumber() + 1 < 6) return 1;
+        else return ((postList.getNumber() / 5) * 5) + 1;
+    }
+
+    private static int getEndPage(Page<PostListDto> postList, int startPage) {
+        if (postList.getTotalPages() > startPage + 4) return startPage + 4;
+        else return postList.getTotalPages();
+    }
+
     /********************* 게시글 CRUD ************************************/
 
     /**
      * 게시글리스트 read
      */
     @GetMapping("/post")
-    public String postList(Model model) {
-        List<PostListDto> postList = postService.findList();
-        model.addAttribute("postListDto", postList);
+    public String postList(Model model,
+                           @PageableDefault(size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+        Page<PostListDto> postList = postService.findList(pageable);
+        model.addAttribute("postListDto", postList.getContent());
+
+        int startPage = getStartPage(postList);
+
+        model.addAttribute("startPage", getStartPage(postList));
+        model.addAttribute("currentPage", postList.getNumber() + 1);
+        model.addAttribute("endPage", getEndPage(postList, startPage));
+        model.addAttribute("hasPrevious", postList.hasPrevious());
+        model.addAttribute("hasNext", postList.hasNext());
 
         return "post/list";
     }
@@ -112,12 +137,18 @@ public class PostController {
      */
     @PostMapping("/post/{post_id}/heart")
     public String changeHeartStatus(@PathVariable Long post_id,
-                       @AuthenticationPrincipal UserDetailsImpl userDetails,
-                       RedirectAttributes redirectAttributes) {
+                                    @AuthenticationPrincipal UserDetailsImpl userDetails,
+                                    RedirectAttributes redirectAttributes) {
 
         heartService.changeHeartStatus(post_id, userDetails.getMember().getId());
 
         redirectAttributes.addAttribute("post_id", post_id);
         return "redirect:/post/{post_id}";
+    }
+
+    @Getter
+    public static class PageDto {
+        int pageSize = 5; // 출력할 페이지 개수
+
     }
 }
