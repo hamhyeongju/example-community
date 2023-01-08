@@ -7,9 +7,9 @@
 <body>
 <div th:replace="~{header/logout :: logout}"></div>
 
-<div class="container position-absolute top-50 start-50 translate-middle">
-
-    <div class="d-grid gap-2 col-10 mx-auto" th:object="${postDto}">
+<div class="d-grid gap-2 mx-auto">
+    <br>
+    <div class="d-grid gap-2 col-8 mx-auto" th:object="${postDto}">
         <div class="row">
             <h1 class="text-center" th:text="*{title}"></h1>
         </div>
@@ -81,18 +81,19 @@
                                     <div class="col-10">
                                         <p th:text="${comment.membername} + ' | ' + ${comment.body}"></p>
                                     </div>
-                                        <div class="col" th:if="${comment.getMember_id().equals(guest_id)}">
-                                            <button type="button"
-                                                    th:onclick="|location.href='@{/post/{post_id}/comment/edit/{comment_id}(post_id=${post_id}, comment_id=${comment.id})}'|"
-                                                    class="btn btn-link">수정
-                                            </button>
-                                        </div>
-                                        <div class="col" th:if="${comment.getMember_id().equals(guest_id)}">
-                                            <form th:action="@{/post/{post_id}/comment/{comment_id}(post_id=${post_id}, comment_id=${comment.id})}" th:method="delete">
-                                                <button type="submit" class="btn btn-link">삭제</button>
-                                            </form>
-                                        </div>
+                                    <div class="col" th:if="${comment.getMember_id().equals(guest_id)}">
+                                        <button type="button"
+                                                th:onclick="|location.href='@{/post/{post_id}/comment/edit/{comment_id}(post_id=${post_id}, comment_id=${comment.id})}'|"
+                                                class="btn btn-link">수정
+                                        </button>
                                     </div>
+                                    <div class="col" th:if="${comment.getMember_id().equals(guest_id)}">
+                                        <form th:action="@{/post/{post_id}/comment/{comment_id}(post_id=${post_id}, comment_id=${comment.id})}"
+                                              th:method="delete">
+                                            <button type="submit" class="btn btn-link">삭제</button>
+                                        </form>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                         </tbody>
@@ -103,5 +104,6 @@
     </div>
 </div>
 </div>
+<!--</div>-->
 </body>
 </html>
