@@ -2,6 +2,7 @@ package example.community.controller;
 
 import example.community.configuration.security.UserDetailsImpl;
 import example.community.repository.customRepository.PostSearch;
+import example.community.repository.customRepository.SearchType;
 import example.community.service.HeartService;
 import example.community.service.PostService;
 import example.community.service.dto.CommentDto;
@@ -32,6 +33,7 @@ public class PostController {
     }
 
     private static int getEndPage(Page<PostListDto> postList, int startPage) {
+        if (postList.getTotalPages() == 0) return 1;
         return Math.min(postList.getTotalPages(), startPage + 4);
     }
 
@@ -51,6 +53,7 @@ public class PostController {
         model.addAttribute("endPage", getEndPage(postList, startPage));
         model.addAttribute("hasPrevious", postList.hasPrevious());
         model.addAttribute("hasNext", postList.hasNext());
+        model.addAttribute("searchType", SearchType.values());
 
         return "post/list";
     }
