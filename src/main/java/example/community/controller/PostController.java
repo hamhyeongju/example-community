@@ -1,6 +1,7 @@
 package example.community.controller;
 
 import example.community.configuration.security.UserDetailsImpl;
+import example.community.repository.customRepository.PostSearch;
 import example.community.service.HeartService;
 import example.community.service.PostService;
 import example.community.service.dto.CommentDto;
@@ -38,9 +39,9 @@ public class PostController {
      * 게시글리스트 read
      */
     @GetMapping("/post")
-    public String postList(Model model,
+    public String postList(Model model, @ModelAttribute("postSearch") PostSearch postSearch,
                            @PageableDefault(size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
-        Page<PostListDto> postList = postService.findList(pageable);
+        Page<PostListDto> postList = postService.findList(pageable, postSearch);
         model.addAttribute("postListDto", postList.getContent());
 
         int startPage = getStartPage(postList);

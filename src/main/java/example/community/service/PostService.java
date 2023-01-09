@@ -6,6 +6,7 @@ import example.community.repository.CommentRepository;
 import example.community.repository.HeartRepository;
 import example.community.repository.MemberRepository;
 import example.community.repository.PostRepository;
+import example.community.repository.customRepository.PostSearch;
 import example.community.service.dto.CommentDto;
 import example.community.service.dto.PostDto;
 import example.community.service.dto.PostListDto;
@@ -30,8 +31,8 @@ public class PostService {
     private final CommentRepository commentRepository;
     private final HeartRepository heartRepository;
 
-    public Page<PostListDto> findList(Pageable pageable) {
-        Page<Post> find = postRepository.findPostList(pageable);
+    public Page<PostListDto> findList(Pageable pageable, PostSearch postSearch) {
+        Page<Post> find = postRepository.findAllPageAndSearch(pageable, postSearch);
         return find.map(PostListDto::new);
     }
 
