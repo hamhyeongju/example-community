@@ -18,8 +18,9 @@
                 <div class="col"></div>
                 <div class="col-2">
                     <select name="searchType" class="form-select">
-                        <option value="">==검색 조건==</option>
-                        <option th:each="type : ${searchType}" th:value="${type}"
+                        <!--                        <option value="">==검색 조건==</option>-->
+                        <option th:if="*{searchType}" th:value="*{searchType}" th:text="*{searchType}"></option>
+                        <option th:unless="${type} == *{searchType}" th:each="type : ${searchType}" th:value="${type}"
                                 th:text="${type}"></option>
                     </select>
                 </div>
@@ -32,49 +33,53 @@
                     </button>
                 </div>
             </div>
-        </form>
-        <br>
 
-        <div class="row">
-            <div class="col">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>작성자</th>
-                        <th>제목 [댓글]</th>
-                        <th>작성일</th>
-                        <th>좋아요</th>
-                    </tr>
-                    </thead>
+            <br>
 
-                    <tbody>
-                    <tr th:each="post : ${postListDto}">
-                        <td th:text="${post.membername}"></td>
-                        <td>
-                            <a th:href="@{/post/{post_id}(post_id=${post.id})}"
-                               th:text="|${post.title} [${post.commentNum}]|"></a>
-                        </td>
-                        <td th:text="${#temporals.format(post.createdDate)}"></td>
-                        <td th:text="${post.heartNum}"></td>
-                    </tr>
-                    </tbody>
-                </table>
+            <div class="row">
+                <div class="col">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>작성자</th>
+                            <th>제목 [댓글]</th>
+                            <th>작성일</th>
+                            <th>좋아요</th>
+                        </tr>
+                        </thead>
 
-                <button th:if="${hasPrevious}" type="button"
-                        th:onclick="|location.href='@{/post(page=${currentPage}-2, )}'|">이전
-                </button>
-                <button th:unless="${hasPrevious}" type="button">이전</button>
-                <th:block th:each="page : ${#numbers.sequence(startPage, endPage)}">
-                    <a th:if="${page == currentPage}" th:href="@{/post(page=${page - 1})}" th:text="|[ ${page} ]|"></a>
-                    <a th:if="${page != currentPage}" th:href="@{/post(page=${page - 1})}" th:text="${page}"></a>
-                </th:block>
-                <button th:if="${hasNext}" type="button" th:onclick="|location.href='@{/post(page=${currentPage})}'|">
-                    다음
-                </button>
-                <button th:unless="${hasNext}" type="button">다음</button>
+                        <tbody>
+                        <tr th:each="post : ${postListDto}">
+                            <td th:text="${post.membername}"></td>
+                            <td>
+                                <a th:href="@{/post/{post_id}(post_id=${post.id})}"
+                                   th:text="|${post.title} [${post.commentNum}]|"></a>
+                            </td>
+                            <td th:text="${#temporals.format(post.createdDate)}"></td>
+                            <td th:text="${post.heartNum}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
 
+
+                    <button th:unless="${hasPrevious}" type="button" class="btn btn-outline-dark btn-sm">이전</button>
+                    <button th:if="${hasPrevious}" type="submit" name="page" th:value="${currentPage - 2}"
+                            class="btn btn-outline-dark btn-sm">이전</button>
+
+                    <th:block th:each="page : ${#numbers.sequence(startPage, endPage)}">
+                        <button th:if="${page == currentPage}" name="page" th:value="${page - 1}" type="submit"
+                                th:text="|[ ${page} ]|" class="btn btn-link btn-sm"></button>
+                        <button th:if="${page != currentPage}" name="page" th:value="${page - 1}" type="submit"
+                                th:text="${page}" class="btn btn-link btn-sm"></button>
+                    </th:block>
+
+                    <button th:if="${hasNext}" type="submit" name="page" th:value="${currentPage}"
+                            class="btn btn-outline-dark btn-sm">다음</button>
+                    <button th:unless="${hasNext}" type="button" class="btn btn-outline-dark btn-sm">다음</button>
+
+                </div>
             </div>
-        </div>
+        </form>
     </div>
 </div>
 </div>
