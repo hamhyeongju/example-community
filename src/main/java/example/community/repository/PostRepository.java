@@ -1,6 +1,7 @@
 package example.community.repository;
 
 import example.community.domain.Post;
+import example.community.repository.customRepository.PostRepositoryCustom;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
@@ -11,7 +12,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface PostRepository extends JpaRepository<Post, Long> {
+public interface PostRepository extends JpaRepository<Post, Long>, PostRepositoryCustom {
 
     @Query(value = "select p from Post p left join fetch p.member",
     countQuery = "select count (p) from Post p")
