@@ -18,10 +18,10 @@
                 <div class="col"></div>
                 <div class="col-2">
                     <select name="searchType" class="form-select">
-                        <!--                        <option value="">==검색 조건==</option>-->
-                        <option th:if="*{searchType}" th:value="*{searchType}" th:text="*{searchType}"></option>
-                        <option th:unless="${type} == *{searchType}" th:each="type : ${searchType}" th:value="${type}"
-                                th:text="${type}"></option>
+                        <option value="">==검색 조건==</option>
+                        <option th:if="*{searchType}" th:value="*{searchType}" th:text="#{*{searchType}}" selected></option>
+                        <option th:unless="${type} == *{searchType}" th:each="type : ${searchTypes}" th:value="${type}"
+                                th:text="#{${type}}"></option>
                     </select>
                 </div>
                 <div class="col-3">
@@ -62,9 +62,11 @@
                     </table>
 
 
-                    <button th:unless="${hasPrevious}" type="button" class="btn btn-outline-dark btn-sm">이전</button>
+                    <button th:unless="${hasPrevious}" type="button" class="btn btn-outline-dark btn-sm" disabled>이전
+                    </button>
                     <button th:if="${hasPrevious}" type="submit" name="page" th:value="${currentPage - 2}"
-                            class="btn btn-outline-dark btn-sm">이전</button>
+                            class="btn btn-outline-dark btn-sm">이전
+                    </button>
 
                     <th:block th:each="page : ${#numbers.sequence(startPage, endPage)}">
                         <button th:if="${page == currentPage}" name="page" th:value="${page - 1}" type="submit"
@@ -74,8 +76,10 @@
                     </th:block>
 
                     <button th:if="${hasNext}" type="submit" name="page" th:value="${currentPage}"
-                            class="btn btn-outline-dark btn-sm">다음</button>
-                    <button th:unless="${hasNext}" type="button" class="btn btn-outline-dark btn-sm">다음</button>
+                            class="btn btn-outline-dark btn-sm">다음
+                    </button>
+                    <button th:unless="${hasNext}" type="button" class="btn btn-outline-dark btn-sm" disabled>다음
+                    </button>
 
                 </div>
             </div>

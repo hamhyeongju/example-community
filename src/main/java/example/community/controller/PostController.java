@@ -53,7 +53,7 @@ public class PostController {
         model.addAttribute("endPage", getEndPage(postList, startPage));
         model.addAttribute("hasPrevious", postList.hasPrevious());
         model.addAttribute("hasNext", postList.hasNext());
-        model.addAttribute("searchType", SearchType.values());
+        model.addAttribute("searchTypes", SearchType.values());
 
         return "post/list";
     }
@@ -141,11 +141,5 @@ public class PostController {
 
         redirectAttributes.addAttribute("post_id", post_id);
         return "redirect:/post/{post_id}";
-    }
-
-    @Getter
-    public static class PageDto {
-        int pageSize = 5; // 출력할 페이지 개수
-
     }
 }
