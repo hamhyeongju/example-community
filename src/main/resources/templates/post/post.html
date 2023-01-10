@@ -16,7 +16,7 @@
         <div class="row">
             <div class="col" th:text="*{membername}"></div>
             <div class="col" th:text="' | ' + *{createdDate}"></div>
-            <div class="col" th:text="' | ' + *{heartNum}"></div>
+            <div class="col" th:text="' | 좋아요 : ' + *{heartNum}"></div>
         </div>
         <div class="row">
             <hr class="mb-5">
