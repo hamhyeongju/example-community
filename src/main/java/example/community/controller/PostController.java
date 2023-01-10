@@ -29,7 +29,7 @@ public class PostController {
     private final HeartService heartService;
 
     private static int getStartPage(Page<PostListDto> postList) {
-        return (postList.getNumber() < 5) ? 1 : ((postList.getNumber() / 5) * 5) + 1;
+        return ((postList.getNumber() / 5) * 5) + 1;
     }
 
     private static int getEndPage(Page<PostListDto> postList, int startPage) {
@@ -42,7 +42,7 @@ public class PostController {
      */
     @GetMapping("/post")
     public String postList(Model model, @ModelAttribute("postSearch") PostSearch postSearch,
-                           @PageableDefault(size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+                           @PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
         Page<PostListDto> postList = postService.findList(pageable, postSearch);
         model.addAttribute("postListDto", postList.getContent());
 
