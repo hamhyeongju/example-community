@@ -14,9 +14,11 @@
 
 ## 로컬 사용법 (윈도우 10, 인텔리제이 기준)
 1. 프로젝트 다운
-2. 인텔리제이 Open `build.gradle` (`Open as Project`).
+2. 인텔리제이 Open `build.gradle` (`Open as Project`)<br>
+2-1. gradle을 통해 외부 라이브러리의 의존성이 추가되지 않았다면 우측의 gradle 패널을 펼처 직접 reload
 3. 인텔리제이 터미널에 `./gradlew clean compileQuerydsl` 입력
-4. application.yml 에서 spring.datasource 부분 주석 처리 및 jpa.hibernate.ddl-auto: create 로 수정
+4. application.yml 에서 spring.datasource 부분 주석 처리 및 jpa.hibernate.ddl-auto: create 로 수정 (메모리상에서 프로젝트 구동, 데이터 저장 X)<br>
+4-1. 만약 데이터를 DB에 저장하고 싶다면 `spring.datasource` 부분을 사용할 DB에 맞게 작성 후 사용
 ```yml
 spring:
 #  datasource:
