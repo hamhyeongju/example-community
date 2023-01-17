@@ -8,6 +8,10 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @brief Post Entity
+ * @relatation Post N : 1 Member, Post 1 : N Comment, Post 1 : N Heart
+ */
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -43,5 +47,4 @@ public class Post extends BaseTimeEntity {
         this.title = title;
         this.body = body;
     }
-
 }

@@ -6,6 +6,10 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+/**
+ * @brief Heart Entity
+ * @relatation Member 1 : N Heart M : 1 Post
+ */
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

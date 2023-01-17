@@ -9,6 +9,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.ArrayList;
 import java.util.Collection;
 
+/**
+ * @brief Spring Security 에서 사용하는 로그인 인증 전용 객체
+ */
 @Getter
 @AllArgsConstructor
 public class UserDetailsImpl implements UserDetails {

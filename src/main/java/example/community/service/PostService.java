@@ -14,7 +14,6 @@ import example.community.service.dto.WritePostDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,6 +35,9 @@ public class PostService {
         return find.map(PostListDto::new);
     }
 
+    /**
+     * @brief Post 와 연관된 Comment 를 지연로딩으로 조회
+     */
     public PostDto findPostAndComment(Long post_id) {
         Post findPost = postRepository.findById(post_id).orElseThrow(IllegalArgumentException::new);
 
@@ -49,6 +51,10 @@ public class PostService {
     public WritePostDto findWritePostDto(Long post_id) {
         Post findPost = postRepository.findById(post_id).orElseThrow(IllegalArgumentException::new);
         return new WritePostDto(findPost.getId(), findPost.getTitle(), findPost.getBody());
+    }
+
+    public Post findPostForInterceptor(Long postId) {
+        return postRepository.findById(postId).orElseThrow(IllegalArgumentException::new);
     }
 
     @Transactional
@@ -81,9 +87,5 @@ public class PostService {
         heartRepository.deleteByPostIds(postIds);
         commentRepository.deleteByPostIds(postIds);
         postRepository.deleteByPostIds(postIds);
-    }
-
-    public Post findPostForInterceptor(Long postId) {
-        return postRepository.findById(postId).orElseThrow(IllegalArgumentException::new);
     }
 }

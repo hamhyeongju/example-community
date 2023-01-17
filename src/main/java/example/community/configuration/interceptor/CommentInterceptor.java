@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * 자신의 댓글에만 수정, 삭제 가능
+ * @brief member_id(pk, fk) 를 비교 하여 Comment 접근 권한 인가
  */
 @RequiredArgsConstructor
 public class CommentInterceptor implements HandlerInterceptor {

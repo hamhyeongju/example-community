@@ -14,6 +14,9 @@ import java.util.List;
 import static example.community.domain.QMember.member;
 import static example.community.domain.QPost.post;
 
+/**
+ * @brief JPARepository 확장, Querydsl 사용한 동적 쿼리 기반 조회 로직
+ */
 public class PostRepositoryImpl implements PostRepositoryCustom {
 
     private final JPAQueryFactory querydsl;
@@ -38,7 +41,7 @@ public class PostRepositoryImpl implements PostRepositoryCustom {
 
     private BooleanExpression searchTypeAndWord(PostSearch postSearch) {
 
-        if (postSearch.isEmpty()) return null;
+        if (postSearch.isBlank()) return null;
 
         switch (postSearch.getSearchType()) {
             case member: return post.member.name.eq(postSearch.getSearchWord());

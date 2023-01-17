@@ -8,6 +8,10 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @brief Member Entity
+ * @relatation Member 1 : N Post, Member 1 : N Comment, Member 1 : N Heart
+ */
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

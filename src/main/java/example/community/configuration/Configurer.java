@@ -14,6 +14,9 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+/**
+ * @brief 설정 담당 클래스, Spring Security filter, Interceptor 설정
+ */
 @Configuration
 @RequiredArgsConstructor
 public class Configurer implements WebMvcConfigurer {

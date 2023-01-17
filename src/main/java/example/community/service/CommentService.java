@@ -21,6 +21,15 @@ public class CommentService {
     private final PostRepository postRepository;
     private final MemberRepository memberRepository;
 
+    public EditCommentDto findCommentDto(Long comment_id) {
+        Comment comment = commentRepository.findById(comment_id).orElseThrow(IllegalArgumentException::new);
+        return new EditCommentDto(comment.getId(), comment.getBody());
+    }
+
+    public Comment findCommentForInterceptor(Long comment_id) {
+        return commentRepository.findById(comment_id).orElseThrow(IllegalArgumentException::new);
+    }
+
     @Transactional
     public void save(CommentDto commentDto, Long post_id, Long member_id) {
         Post post = postRepository.findById(post_id).orElseThrow(IllegalArgumentException::new);
@@ -40,14 +49,5 @@ public class CommentService {
     public void delete(Long comment_id, Long post_id) {
         Post post = postRepository.findById(post_id).orElseThrow(IllegalArgumentException::new);
         commentRepository.deleteById(comment_id);
-    }
-
-    public EditCommentDto findCommentDto(Long comment_id) {
-        Comment comment = commentRepository.findById(comment_id).orElseThrow(IllegalArgumentException::new);
-        return new EditCommentDto(comment.getId(), comment.getBody());
-    }
-
-    public Comment findCommentForInterceptor(Long comment_id) {
-        return commentRepository.findById(comment_id).orElseThrow(IllegalArgumentException::new);
     }
 }

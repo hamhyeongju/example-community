@@ -19,6 +19,9 @@ public class HeartService {
     private final MemberRepository memberRepository;
     private final HeartRepository heartRepository;
 
+    /**
+     * @brief Heart 생성과 삭제를 동시에 처리
+     */
     @Transactional
     public void changeHeartStatus(Long post_id, Long member_id) {
 

@@ -6,6 +6,10 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+/**
+ * @brief Comment Entity
+ * @relatation Comment N : 1 Member, Comment N : 1 Post
+ */
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

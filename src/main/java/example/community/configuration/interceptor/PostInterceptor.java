@@ -21,7 +21,7 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
- * 자신의 post 에만 수정(get 요청 포함), 삭제 요청 가능
+ * @brief member_id(pk, fk) 를 비교 하여 Post 접근 권한 인가
  */
 @RequiredArgsConstructor
 public class PostInterceptor implements HandlerInterceptor {
@@ -41,6 +41,7 @@ public class PostInterceptor implements HandlerInterceptor {
         int pos = requestURI.lastIndexOf("/");
         Long postId = Long.parseLong(requestURI.substring(pos + 1));
 
+        // 단순 조회 로직일 경우
         if (method.getMethod().getName().equals("post")) return true;
 
         Post post = postService.findPostForInterceptor(postId);

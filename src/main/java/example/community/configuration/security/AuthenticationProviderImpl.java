@@ -10,6 +10,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
+/**
+ * @brief Spring Security 에서 로그인 기능
+ */
 @Component
 @RequiredArgsConstructor
 public class AuthenticationProviderImpl implements AuthenticationProvider {

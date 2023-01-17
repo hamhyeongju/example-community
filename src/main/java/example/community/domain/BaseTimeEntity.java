@@ -9,6 +9,9 @@ import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
 
+/**
+ * @brief Auditing entity
+ */
 @EntityListeners(AuditingEntityListener.class)
 @MappedSuperclass
 @Getter

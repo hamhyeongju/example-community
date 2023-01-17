@@ -9,7 +9,6 @@ import example.community.service.dto.CommentDto;
 import example.community.service.dto.PostDto;
 import example.community.service.dto.PostListDto;
 import example.community.service.dto.WritePostDto;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -38,7 +37,7 @@ public class PostController {
     }
 
     /**
-     * 게시글리스트 read
+     * @brief 게시글리스트 조회
      */
     @GetMapping("/post")
     public String postList(Model model, @ModelAttribute("postSearch") PostSearch postSearch,
@@ -59,7 +58,7 @@ public class PostController {
     }
 
     /**
-     * 게시글 read
+     * @brief 게시글 조회
      */
     @GetMapping("/post/{post_id}")
     public String post(@PathVariable Long post_id, Model model,
@@ -73,7 +72,7 @@ public class PostController {
     }
 
     /**
-     * 게시글 등록 폼
+     * @brief 게시글 등록 폼 조회
      */
     @GetMapping("/post/add")
     public String addPostForm(@ModelAttribute("postDto") WritePostDto writePostDto) {
@@ -81,7 +80,7 @@ public class PostController {
     }
 
     /**
-     * 게시글 수정 폼
+     * @brief 게시글 수정 폼 조회
      */
     @GetMapping("/post/edit/{post_id}")
     public String editPostForm(@PathVariable Long post_id, Model model) {
@@ -92,7 +91,7 @@ public class PostController {
     }
 
     /**
-     * 게시글 등록
+     * @brief 게시글 등록
      */
     @PostMapping("/post")
     public String createPost(@ModelAttribute WritePostDto writePostDto, RedirectAttributes redirectAttributes,
@@ -105,7 +104,7 @@ public class PostController {
     }
 
     /**
-     * 게시글 수정
+     * @brief 게시글 수정
      */
     @PatchMapping("/post/{post_id}")
     public String updatePost(@PathVariable Long post_id,
@@ -120,7 +119,7 @@ public class PostController {
     }
 
     /**
-     * 게시글 삭제
+     * @brief 게시글 삭제
      */
     @DeleteMapping("/post/{post_id}")
     public String deletePost(@PathVariable Long post_id) {
@@ -130,7 +129,7 @@ public class PostController {
     }
 
     /**
-     * 좋아요 기능
+     * @brief 좋아요 생성 및 삭제
      */
     @PostMapping("/post/{post_id}/heart")
     public String changeHeartStatus(@PathVariable Long post_id,

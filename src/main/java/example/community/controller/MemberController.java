@@ -18,7 +18,7 @@ public class MemberController {
     private final MemberService memberService;
 
     /**
-     * 회원가입 폼
+     * @brief 회원가입 폼 조회
      */
     @GetMapping("/join")
     public String joinForm(@ModelAttribute("memberDto") MemberJoinDto memberJoinDto) {
@@ -26,7 +26,7 @@ public class MemberController {
     }
 
     /**
-     * 로그인 폼
+     * @brief 로그인 폼 조회
      */
     @GetMapping("/login")
     public String loginForm(@ModelAttribute("loginDto") LoginDto loginDto,
@@ -35,7 +35,7 @@ public class MemberController {
     }
 
     /**
-     * 회원가입
+     * @brief 회원가입
      */
     @PostMapping("/member")
     public String join(@ModelAttribute MemberJoinDto memberJoinDto) {
@@ -44,7 +44,7 @@ public class MemberController {
     }
 
     /**
-     * 회원탈퇴
+     * @brief 회원탈퇴
      */
     @DeleteMapping("/member/{member_id}")
     public String deleteMember(@PathVariable Long member_id, @AuthenticationPrincipal UserDetailsImpl userDetails) {

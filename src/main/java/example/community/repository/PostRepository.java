@@ -4,7 +4,6 @@ import example.community.domain.Post;
 import example.community.repository.customRepository.PostRepositoryCustom;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Slice;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -14,6 +13,9 @@ import java.util.List;
 
 public interface PostRepository extends JpaRepository<Post, Long>, PostRepositoryCustom {
 
+    /**
+     * @deprecated Querydsl 도입으로 PostRepositoryImpl.findAllPageAndSearch()로 대체
+     */
     @Query(value = "select p from Post p left join fetch p.member",
     countQuery = "select count (p) from Post p")
     Page<Post> findPostList(Pageable pageable);
