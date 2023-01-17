@@ -9,7 +9,7 @@
 
 <div class="container position-absolute top-50 start-50 translate-middle">
     <div class="d-grid gap-2 col-6 mx-auto">
-        <form th:action="@{/post/{post_id}(post_id=${post_id})}" th:object="${postDto}" th:method="put">
+        <form th:action="@{/post/{post_id}(post_id=${post_id})}" th:object="${postDto}" th:method="patch">
             <fieldset>
                 <legend class="text-center">게시글 수정</legend>
                 <br>

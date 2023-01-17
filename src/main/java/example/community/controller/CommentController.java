@@ -47,7 +47,7 @@ public class CommentController {
     /**
      * 댓글 수정
      */
-    @PutMapping("/post/{post_id}/comment/{comment_id}")
+    @PatchMapping("/post/{post_id}/comment/{comment_id}")
     public String updateComment(@PathVariable Long post_id, @PathVariable Long comment_id,
                                 @ModelAttribute CommentDto commentDto, RedirectAttributes redirectAttributes) {
 

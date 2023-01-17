@@ -107,7 +107,7 @@ public class PostController {
     /**
      * 게시글 수정
      */
-    @PutMapping("/post/{post_id}")
+    @PatchMapping("/post/{post_id}")
     public String updatePost(@PathVariable Long post_id,
                              @ModelAttribute WritePostDto writePostDto,
                              RedirectAttributes redirectAttributes) {
